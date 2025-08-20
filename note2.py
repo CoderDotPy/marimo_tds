@@ -7,12 +7,14 @@ def _():
     # Cell 1: Imports
     # Provides: mo, np, plt
     # Used by: Cell 2 (mo), Cell 3 (np, plt), Cell 4 (mo)
+
+    # email : 22f3000814@ds.study.iitm.ac.in
     import marimo as mo
     import numpy as np
     import matplotlib.pyplot as plt
     return mo, np, plt
 
-    # email : 22f3000814@ds.study.iitm.ac.in)
+   
 
 @app.cell
 def _(mo):
