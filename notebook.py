@@ -10,7 +10,7 @@ app = marimo.App(width="medium")
 
 @app.cell
 def _():
-    # Email: abcd@gmail.com
+    # Email: 22f3000814@ds.study.iitm.ac.in
     import marimo as mo
     import numpy as np
     import matplotlib.pyplot as plt
@@ -50,3 +50,4 @@ def _():
 
 if __name__ == "__main__":
     app.run()
+
