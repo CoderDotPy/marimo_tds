@@ -11,7 +11,9 @@ app = marimo.App(width="medium")
 @app.cell
 def _():
     # Email: 22f3000814@ds.study.iitm.ac.in
-    # Import dependencies shared across cells
+    # Cell 1: Imports
+    # Provides: mo, np, plt
+    # Used by: Cell 2 (mo), Cell 3 (np, plt), Cell 4 (mo)
     import marimo as mo
     import numpy as np
     import matplotlib.pyplot as plt
@@ -19,18 +21,19 @@ def _():
 
 @app.cell
 def _(mo):
-    # Cell 2: Create a slider widget
-    # Provides the variable `n_points` for later cells
+    # Cell 2: Slider widget
+    # Provides: n_points
+    # Used by: Cell 3 (to generate random data), Cell 4 (to show dynamic markdown)
     n_points = mo.ui.slider(10, 100, value=50, label="Number of points")
-    n_points  # Display slider
+    n_points  # Display the slider
     return n_points
 
 @app.cell
 def _(np, plt, n_points):
-    # Cell 3: Generate data and plot
-    # Depends on:
-    #   - `n_points` (from Cell 2: user input)
-    #   - `np` and `plt` (from Cell 1: imports)
+    # Cell 3: Data generation and plotting
+    # Depends on: n_points (Cell 2), np (Cell 1), plt (Cell 1)
+    # Provides: x, y
+    # Used by: (could be reused in future cells for analysis)
     x = np.random.rand(n_points.value)
     y = np.random.rand(n_points.value)
 
@@ -39,15 +42,14 @@ def _(np, plt, n_points):
     plt.title(f"Scatter plot with {n_points.value} points")
     plt.xlabel("X axis")
     plt.ylabel("Y axis")
-    plt.gca()  # Return current axes so plot displays
+    plt.gca()  # Return the current axes to display the plot
     return x, y
 
 @app.cell
 def _(mo, n_points):
     # Cell 4: Dynamic Markdown output
-    # Depends on:
-    #   - `n_points` (from Cell 2: user input)
-    #   - `mo` (from Cell 1: import)
+    # Depends on: mo (Cell 1), n_points (Cell 2)
+    # Provides: a markdown block describing current slider state
     mo.md(f"""
     # Dynamic Output
     
